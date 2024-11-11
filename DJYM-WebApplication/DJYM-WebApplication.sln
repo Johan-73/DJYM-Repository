@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DJYM-WebApplication", "DJYM-WebApplication.csproj", "{B7B8530C-14DF-41A1-AEF9-5B7DDFA2882F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7B8530C-14DF-41A1-AEF9-5B7DDFA2882F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7B8530C-14DF-41A1-AEF9-5B7DDFA2882F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7B8530C-14DF-41A1-AEF9-5B7DDFA2882F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7B8530C-14DF-41A1-AEF9-5B7DDFA2882F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A2EE562-D18D-49B0-91C8-E694448E7916}
+	EndGlobalSection
+EndGlobal
