@@ -27,29 +27,29 @@ namespace DJYM_WebApplication.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CAJA_REGISTRADORA> CAJA_REGISTRADORA { get; set; }
-        public virtual DbSet<CARGO> CARGOes { get; set; }
-        public virtual DbSet<CATEGORIA> CATEGORIAs { get; set; }
-        public virtual DbSet<CLIENTE> CLIENTEs { get; set; }
-        public virtual DbSet<DETALLE_FACTURA_COMPRA> DETALLE_FACTURA_COMPRA { get; set; }
-        public virtual DbSet<DETALLE_FACTURA_VENTA> DETALLE_FACTURA_VENTA { get; set; }
-        public virtual DbSet<EMPLEADO> EMPLEADOes { get; set; }
-        public virtual DbSet<FACTURA_COMPRA> FACTURA_COMPRA { get; set; }
-        public virtual DbSet<FACTURA_VENTA> FACTURA_VENTA { get; set; }
-        public virtual DbSet<OPERACION_CAJA> OPERACION_CAJA { get; set; }
-        public virtual DbSet<PAGINA> PAGINAs { get; set; }
-        public virtual DbSet<PERFIL> PERFILs { get; set; }
-        public virtual DbSet<PERIODO> PERIODOes { get; set; }
-        public virtual DbSet<PRODUCTO> PRODUCTOes { get; set; }
-        public virtual DbSet<PROVEEDOR> PROVEEDORs { get; set; }
-        public virtual DbSet<REPORTE> REPORTEs { get; set; }
-        public virtual DbSet<REPORTE_COMPRAS> REPORTE_COMPRAS { get; set; }
-        public virtual DbSet<REPORTE_ROTACION> REPORTE_ROTACION { get; set; }
-        public virtual DbSet<REPORTE_VENTAS> REPORTE_VENTAS { get; set; }
+        public virtual DbSet<CAJA_REGISTRADORA> DbSet_CAJA_REGISTRADORA { get; set; }
+        public virtual DbSet<CARGO> DbSet_CARGO { get; set; }
+        public virtual DbSet<CATEGORIA> DbSet_CATEGORIA { get; set; }
+        public virtual DbSet<CLIENTE> DbSet_CLIENTE { get; set; }
+        public virtual DbSet<DETALLE_FACTURA_COMPRA> DbSet_DETALLE_FACTURA_COMPRA { get; set; }
+        public virtual DbSet<DETALLE_FACTURA_VENTA> DbSet_DETALLE_FACTURA_VENTA { get; set; }
+        public virtual DbSet<EMPLEADO> DbSet_EMPLEADOes { get; set; }
+        public virtual DbSet<FACTURA_COMPRA> DbSet_FACTURA_COMPRA { get; set; }
+        public virtual DbSet<FACTURA_VENTA> DbSet_FACTURA_VENTA { get; set; }
+        public virtual DbSet<OPERACION_CAJA> DbSet_OPERACION_CAJA { get; set; }
+        public virtual DbSet<PAGINA> DbSet_PAGINA { get; set; }
+        public virtual DbSet<PERFIL> DbSet_PERFIL { get; set; }
+        public virtual DbSet<PERIODO> DbSet_PERIODO { get; set; }
+        public virtual DbSet<PRODUCTO> DbSet_PRODUCTO { get; set; }
+        public virtual DbSet<PROVEEDOR> DbSet_PROVEEDOR { get; set; }
+        public virtual DbSet<REPORTE> DbSet_REPORTE { get; set; }
+        public virtual DbSet<REPORTE_COMPRAS> DbSet_REPORTE_COMPRAS { get; set; }
+        public virtual DbSet<REPORTE_ROTACION> DbSet_REPORTE_ROTACION { get; set; }
+        public virtual DbSet<REPORTE_VENTAS> DbSet_REPORTE_VENTAS { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TURNO> TURNOes { get; set; }
-        public virtual DbSet<USUARIO> USUARIOs { get; set; }
-        public virtual DbSet<USUARIO_PERFIL> USUARIO_PERFIL { get; set; }
+        public virtual DbSet<TURNO> DbSet_TURNO { get; set; }
+        public virtual DbSet<USUARIO> DbSet_USUARIO { get; set; }
+        public virtual DbSet<USUARIO_PERFIL> DbSet_USUARIO_PERFIL { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
