@@ -1,4 +1,4 @@
-﻿using DJYM_WebApplication.Models;
+using DJYM_WebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -33,12 +33,26 @@ namespace DJYM_WebApplication.Servicios
 
 		public PAGINA ConsultarXId()
 		{
-			return DJYM.DbSet_PAGINA.FirstOrDefault(paginaDB => paginaDB.Codigo == pagina.Codigo);
+			try
+			{
+				return DJYM.DbSet_PAGINA.FirstOrDefault(paginaDB => paginaDB.Codigo == pagina.Codigo);
+			}
+			catch(Exception ex)
+			{
+				return ex.Mesage;
+			}
 		}
 
 		public IQueryable<PAGINA> Consultar()
 		{
-			return DJYM.DbSet_PAGINA.AsQueryable();
+			try
+			{
+				return DJYM.DbSet_PAGINA.AsQueryable();
+			}
+			catch(Exception ex)
+			{
+				return ex.Message;
+			}
 		}
 
 		public string Actualizar()
@@ -66,16 +80,15 @@ namespace DJYM_WebApplication.Servicios
 		{
 			try
 			{
-				PAGINA paginaExistente = ConsultarXId();
-				if (paginaExistente != null)
+				if (ConsultarXId() != null)
 				{
 					PAGINA paginaEliminada = DJYM.DbSet_PAGINA.Remove(pagina);
 					DJYM.SaveChanges();
-					return $"Se eliminó la pagina con código: {pagina.Codigo}"; ;
+					return $"Se eliminó la pagina {paginaEliminada.Titulo} con código: {paginaEliminada.Codigo}"; ;
 				}
 				else
 				{
-					return $"La pagina {paginaExistente.Titulo.ToUpper()} con código {paginaExistente.Codigo} no existe en la base de datos";
+					return $"La pagina con código {pagina.Codigo} no existe en la base de datos";
 				}
 			}
 			catch (Exception ex)
