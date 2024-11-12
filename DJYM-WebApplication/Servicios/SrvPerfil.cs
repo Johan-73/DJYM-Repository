@@ -7,12 +7,12 @@ using System.Web;
 
 namespace DJYM_WebApplication.Servicios
 {
-    public class SrvPagina
+    public class SrvPerfil
     {
 		private DBSuper_DJYMEntities DJYM;
-        public PAGINA pagina { get; set; }
+        public PERFIL perfil { get; set; }
 
-		public SrvPagina()
+		public Srv()
 		{
 			DBSuper_DJYMEntities DJYM = new DBSuper_DJYMEntities();
 		}
@@ -21,9 +21,9 @@ namespace DJYM_WebApplication.Servicios
         {
 			try
 			{
-				PAGINA paginaInsertada = DJYM.DbSet_PAGINA.Add(pagina);
+				PERFIL perfilInsertado = DJYM.DbSet_PERFIL.Add(perfil);
 				DJYM.SaveChanges();
-				return $"Se grabó la pagina {paginaInsertada.Titulo} con código {paginaInsertada.Codigo}";
+				return $"Se grabó el perfil {perfilInsertado.Nombre} con Id: {perfilInsertado.Id}";
 			}
 			catch (Exception ex)
 			{
@@ -31,11 +31,11 @@ namespace DJYM_WebApplication.Servicios
 			}
         }
 
-		public PAGINA ConsultarXId()
+		public PERFIL ConsultarXId()
 		{
 			try
 			{
-				return DJYM.DbSet_PAGINA.FirstOrDefault(paginaDB => paginaDB.Codigo == pagina.Codigo);
+				return DJYM.DbSet_PERFIL.FirstOrDefault(perfilDB => perfilDB.Id == perfil.Id);
 			}
 			catch(Exception ex)
 			{
@@ -43,11 +43,11 @@ namespace DJYM_WebApplication.Servicios
 			}
 		}
 
-		public IQueryable<PAGINA> Consultar()
+		public IQueryable<PERFIL> Consultar()
 		{
 			try
 			{
-				return DJYM.DbSet_PAGINA.AsQueryable();
+				return DJYM.DbSet_PERFIL.AsQueryable();
 			}
 			catch(Exception ex)
 			{
@@ -61,13 +61,13 @@ namespace DJYM_WebApplication.Servicios
 			{
 				if (ConsultarXId() != null)
 				{
-					DJYM.DbSet_PAGINA.AddOrUpdate(pagina);
+					DJYM.DbSet_PERFIL.AddOrUpdate(perfil);
 					DJYM.SaveChanges();
-					return $"Se actualizó la pagina con código {pagina.Codigo}";
+					return $"Se actualizó el perfil con id {perfil.Id}";
 				}
 				else
 				{
-					return $"La pagina con código {pagina.Codigo} no existe en la base de datos";
+					return $"El perfil con Id {perfil.Id} no existe en la base de datos";
 				}
 			}
 			catch (Exception ex)
@@ -82,13 +82,13 @@ namespace DJYM_WebApplication.Servicios
 			{
 				if (ConsultarXId() != null)
 				{
-					PAGINA paginaEliminada = DJYM.DbSet_PAGINA.Remove(pagina);
+					PERFIL perfilEliminado = DJYM.DbSet_PERFIL.Remove(perfil);
 					DJYM.SaveChanges();
-					return $"Se eliminó la pagina {paginaEliminada.Titulo} con código: {paginaEliminada.Codigo}"; ;
+					return $"Se eliminó el perfil {perfilEliminado.Nombre} con Id: {perfilEliminado.Id}"; ;
 				}
 				else
 				{
-					return $"La pagina con código {pagina.Codigo} no existe en la base de datos";
+					return $"El perfil con Id {perfil.Id} no existe en la base de datos";
 				}
 			}
 			catch (Exception ex)
