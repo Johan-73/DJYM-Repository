@@ -1,3 +1,4 @@
+using DJYM_WebApplication.DTOs;
 using DJYM_WebApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -9,91 +10,125 @@ namespace DJYM_WebApplication.Servicios
 {
     public class SrvPerfil
     {
-		private DBSuper_DJYMEntities DJYM;
-        public PERFIL perfil { get; set; }
+		private readonly DBSuper_DJYMEntities DJYM;
+        public PERFIL Perfil { get; set; }
 
-		public Srv()
+		public SrvPerfil()
 		{
 			DBSuper_DJYMEntities DJYM = new DBSuper_DJYMEntities();
 		}
 
-		public string Insertar()
+		public Resultado<PERFIL> Insertar()
         {
 			try
 			{
-				PERFIL perfilInsertado = DJYM.DbSet_PERFIL.Add(perfil);
+				PERFIL perfilInsertado = DJYM.DbSet_PERFIL.Add(Perfil);
 				DJYM.SaveChanges();
-				return $"Se grabó el perfil {perfilInsertado.Nombre} con Id: {perfilInsertado.Id}";
-			}
+
+				string mensajeExito = "El perfil se insertó exitosamene";
+                Resultado<PERFIL> resultado = new Resultado<PERFIL>(perfilInsertado)
+                {
+                    MensajeExito = mensajeExito
+                };
+                return resultado;
+
+            }
 			catch (Exception ex)
 			{
-				return ex.Message;
+				return new Resultado<PERFIL>(ex.Message);
 			}
         }
 
-		public PERFIL ConsultarXId()
+		public Resultado<PERFIL> ConsultarXId()
 		{
 			try
 			{
-				return DJYM.DbSet_PERFIL.FirstOrDefault(perfilDB => perfilDB.Id == perfil.Id);
-			}
+                PERFIL perfilConsultado = DJYM.DbSet_PERFIL.FirstOrDefault(perfilDB => perfilDB.Id == Perfil.Id);
+                string mensajeExito = "El perfil se consultó exitosamente";
+                Resultado<PERFIL> resultado = new Resultado<PERFIL>(perfilConsultado)
+                {
+                    MensajeExito = mensajeExito
+                };
+				return resultado;
+            }
 			catch(Exception ex)
 			{
-				return ex.Mesage;
+				return new Resultado<PERFIL>(ex.Message);
 			}
 		}
 
-		public IQueryable<PERFIL> Consultar()
+		public Resultado<IQueryable<PERFIL>> Consultar()
 		{
 			try
 			{
-				return DJYM.DbSet_PERFIL.AsQueryable();
-			}
+                IQueryable<PERFIL> perfilQueryable = DJYM.DbSet_PERFIL.AsQueryable();
+				string mensajeExitoso = "Los perfiles se consultaron exitosamene ";
+				Resultado<IQueryable<PERFIL>> resultado = new Resultado<IQueryable<PERFIL>>(perfilQueryable)
+				{
+					MensajeExito = mensajeExitoso
+				};
+				return resultado;
+            }
 			catch(Exception ex)
 			{
-				return ex.Message;
+				return new Resultado<IQueryable<PERFIL>>(ex.Message);
 			}
 		}
 
-		public string Actualizar()
+		public Resultado<PERFIL> Actualizar()
+		{
+			try
+			{
+                Resultado<PERFIL> resultadoPerfilConsultado = ConsultarXId(); 
+                if (resultadoPerfilConsultado.Exito)
+				{
+					DJYM.DbSet_PERFIL.AddOrUpdate(Perfil);
+					DJYM.SaveChanges();
+
+                    PERFIL perfilConsultado = ConsultarXId().Value;
+                    string mensajeExitoso = "El perfil se actualizó correctamente";
+					Resultado<PERFIL> resultado = new Resultado<PERFIL>(perfilConsultado)
+					{
+						MensajeExito = mensajeExitoso
+					};
+					return resultado;
+                }
+				else
+				{
+					string mensajeError = $"El perfil con Id {Perfil.Id} no existe en la base de datos";
+                    return new Resultado<PERFIL>(mensajeError);
+                }
+			}
+			catch (Exception ex)
+			{
+				return new Resultado<PERFIL>(ex.Message);
+			}
+		}
+
+		public Resultado<PERFIL> Eliminar()
 		{
 			try
 			{
 				if (ConsultarXId() != null)
 				{
-					DJYM.DbSet_PERFIL.AddOrUpdate(perfil);
+					PERFIL perfilEliminado = DJYM.DbSet_PERFIL.Remove(Perfil);
 					DJYM.SaveChanges();
-					return $"Se actualizó el perfil con id {perfil.Id}";
-				}
+					string mensajeExitoso = "El perfil se eliminó exitosamente";
+					Resultado<PERFIL> resultado = new Resultado<PERFIL>(perfilEliminado)
+					{
+						MensajeExito = mensajeExitoso
+					};
+					return resultado;
+                }
 				else
 				{
-					return $"El perfil con Id {perfil.Id} no existe en la base de datos";
-				}
+					string mensajeError = $"El perfil con Id {Perfil.Id} no existe en la base de datos";
+					return new Resultado<PERFIL>(mensajeError);
+                }
 			}
 			catch (Exception ex)
 			{
-				return ex.Message;
-			}
-		}
-
-		public string Eliminar()
-		{
-			try
-			{
-				if (ConsultarXId() != null)
-				{
-					PERFIL perfilEliminado = DJYM.DbSet_PERFIL.Remove(perfil);
-					DJYM.SaveChanges();
-					return $"Se eliminó el perfil {perfilEliminado.Nombre} con Id: {perfilEliminado.Id}"; ;
-				}
-				else
-				{
-					return $"El perfil con Id {perfil.Id} no existe en la base de datos";
-				}
-			}
-			catch (Exception ex)
-			{
-				return ex.Message;
+				return new Resultado<PERFIL>(ex.Message);
 			}
 		}
 	}

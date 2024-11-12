@@ -1,3 +1,4 @@
+using DJYM_WebApplication.DTOs;
 using DJYM_WebApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -17,29 +18,40 @@ namespace DJYM_WebApplication.Servicios
 			DBSuper_DJYMEntities DJYM = new DBSuper_DJYMEntities();
 		}
 
-		public string Insertar()
+		public Resultado<PAGINA> Insertar()
         {
 			try
 			{
 				PAGINA paginaInsertada = DJYM.DbSet_PAGINA.Add(pagina);
 				DJYM.SaveChanges();
-				return $"Se grabó la pagina {paginaInsertada.Titulo} con código {paginaInsertada.Codigo}";
-			}
+				string mensajeExitoso = "La página se insertó exitosamene";
+				Resultado<PAGINA> resultado = new Resultado<PAGINA>(paginaInsertada)
+				{
+					MensajeExito = mensajeExitoso,
+				};
+				return resultado;
+            }
 			catch (Exception ex)
 			{
-				return ex.Message;
+				return new Resultado<PAGINA>(ex.Message);
 			}
         }
 
-		public PAGINA ConsultarXId()
+		public Resultado<PAGINA> ConsultarXId()
 		{
 			try
 			{
-				return DJYM.DbSet_PAGINA.FirstOrDefault(paginaDB => paginaDB.Codigo == pagina.Codigo);
-			}
-			catch(Exception ex)
+				PAGINA paginaConsultada = DJYM.DbSet_PAGINA.FirstOrDefault(paginaDB => paginaDB.Codigo == pagina.Codigo);
+				string mensajeExitoso = "La página se consultó exitosamente";
+				Resultado<PAGINA> resultado = new Resultado<PAGINA>(paginaConsultada)
+				{
+					MensajeExito = mensajeExitoso
+				};
+				return resultado;
+            }
+			catch (Exception ex)
 			{
-				return ex.Mesage;
+				return new Resultado<PAGINA>(ex.Message);
 			}
 		}
 
@@ -47,7 +59,7 @@ namespace DJYM_WebApplication.Servicios
 		{
 			try
 			{
-				return DJYM.DbSet_PAGINA.AsQueryable();
+                IQueryable<PAGINA> DJYM.DbSet_PAGINA.AsQueryable();
 			}
 			catch(Exception ex)
 			{
