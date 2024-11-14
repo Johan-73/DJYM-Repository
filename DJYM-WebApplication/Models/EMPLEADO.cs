@@ -10,6 +10,7 @@
 namespace DJYM_WebApplication.Models
 {
     using DJYM_WebApplication.Interfaces;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -29,13 +30,17 @@ namespace DJYM_WebApplication.Models
         public string Direccion { get; set; }
         public string NumeroCelular { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
-        public int ClavePrimaria => Documento; 
-
+        [JsonIgnore]
+        public int ClavePrimaria => Documento;
+        [JsonIgnore]
         public virtual CARGO CARGO { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FACTURA_COMPRA> FACTURA_COMPRA { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TURNO> TURNOes { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO> USUARIOs { get; set; }
     }

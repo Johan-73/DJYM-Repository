@@ -165,6 +165,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaginasController.cs" />
     <Compile Include="Controllers\PerfilesController.cs" />
+    <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="DTOs\Resultado.cs" />
     <Compile Include="Global.asax.cs">
@@ -265,6 +266,7 @@
     <Compile Include="Servicios\Comun\CRUD.cs" />
     <Compile Include="Servicios\SrvPagina.cs" />
     <Compile Include="Servicios\SrvPerfil.cs" />
+    <Compile Include="Servicios\SrvEmpleado.cs" />
     <Compile Include="Servicios\SrvUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
