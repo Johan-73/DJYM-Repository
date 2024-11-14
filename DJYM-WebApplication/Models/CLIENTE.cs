@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class CLIENTE
+    public partial class CLIENTE : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CLIENTE()
@@ -24,7 +25,8 @@ namespace DJYM_WebApplication.Models
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string NumeroCelular { get; set; }
-    
+        public int ClavePrimaria => Documento;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FACTURA_VENTA> FACTURA_VENTA { get; set; }
     }

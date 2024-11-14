@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class PRODUCTO
+    public partial class PRODUCTO : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCTO()
@@ -28,7 +29,8 @@ namespace DJYM_WebApplication.Models
         public string Descripcion { get; set; }
         public Nullable<decimal> PrecioPublico { get; set; }
         public Nullable<decimal> PrecioProveedor { get; set; }
-    
+        public int ClavePrimaria => Codigo; 
+
         public virtual CATEGORIA CATEGORIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_FACTURA_COMPRA> DETALLE_FACTURA_COMPRA { get; set; }

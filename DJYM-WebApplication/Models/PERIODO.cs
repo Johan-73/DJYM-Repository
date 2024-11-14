@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class PERIODO
+    public partial class PERIODO : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PERIODO()
@@ -24,7 +25,8 @@ namespace DJYM_WebApplication.Models
         public string Tipo { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
-    
+        public int ClavePrimaria => Codigo; 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REPORTE> REPORTEs { get; set; }
     }

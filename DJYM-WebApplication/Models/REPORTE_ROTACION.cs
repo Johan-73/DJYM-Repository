@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class REPORTE_ROTACION
+    public partial class REPORTE_ROTACION : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public REPORTE_ROTACION()
@@ -22,7 +23,8 @@ namespace DJYM_WebApplication.Models
     
         public int NumeroReporte { get; set; }
         public Nullable<int> CantidadProductosMasRotados { get; set; }
-    
+        public int ClavePrimaria => NumeroReporte; 
+
         public virtual REPORTE REPORTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_FACTURA_VENTA> DETALLE_FACTURA_VENTA { get; set; }

@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class REPORTE_COMPRAS
+    public partial class REPORTE_COMPRAS : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public REPORTE_COMPRAS()
@@ -22,7 +23,8 @@ namespace DJYM_WebApplication.Models
     
         public int NumeroReporte { get; set; }
         public Nullable<decimal> ValorComprasTotales { get; set; }
-    
+        public int ClavePrimaria => NumeroReporte; 
+
         public virtual REPORTE REPORTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FACTURA_COMPRA> FACTURA_COMPRA { get; set; }

@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class FACTURA_COMPRA
+    public partial class FACTURA_COMPRA : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FACTURA_COMPRA()
@@ -26,7 +27,8 @@ namespace DJYM_WebApplication.Models
         public Nullable<int> DocumentoEmpleado { get; set; }
         public Nullable<decimal> TotalVenta { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-    
+        public int ClavePrimaria => Numero; 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_FACTURA_COMPRA> DETALLE_FACTURA_COMPRA { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }

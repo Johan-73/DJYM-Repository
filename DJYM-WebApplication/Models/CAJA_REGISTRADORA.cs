@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class CAJA_REGISTRADORA
+    public partial class CAJA_REGISTRADORA : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CAJA_REGISTRADORA()
@@ -25,12 +26,15 @@ namespace DJYM_WebApplication.Models
         public int Numero { get; set; }
         public string Marca { get; set; }
         public string Descripcion { get; set; }
-    
+        public int ClavePrimaria => Numero;
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FACTURA_VENTA> FACTURA_VENTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OPERACION_CAJA> OPERACION_CAJA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TURNO> TURNOes { get; set; }
+
     }
 }

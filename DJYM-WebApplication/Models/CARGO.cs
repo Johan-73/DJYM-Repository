@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class CARGO
+    public partial class CARGO : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CARGO()
@@ -23,7 +24,8 @@ namespace DJYM_WebApplication.Models
         public int Codigo { get; set; }
         public string Descripcion { get; set; }
         public Nullable<decimal> Saldo { get; set; }
-    
+        public int ClavePrimaria => Codigo;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMPLEADO> EMPLEADOes { get; set; }
     }

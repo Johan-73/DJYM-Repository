@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class PROVEEDOR
+    public partial class PROVEEDOR : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PROVEEDOR()
@@ -25,7 +26,8 @@ namespace DJYM_WebApplication.Models
         public string RazonSocial { get; set; }
         public string NumeroCelular { get; set; }
         public string Direccion { get; set; }
-    
+        public int ClavePrimaria => NIT;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FACTURA_COMPRA> FACTURA_COMPRA { get; set; }
     }

@@ -9,10 +9,12 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
-    public partial class PAGINA
+    public partial class PAGINA : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PAGINA()
@@ -23,7 +25,8 @@ namespace DJYM_WebApplication.Models
         public int Codigo { get; set; }
         public string Titulo { get; set; }
         public string URL { get; set; }
-    
+        public int ClavePrimaria => Codigo;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PERFIL> PERFILs { get; set; }
     }

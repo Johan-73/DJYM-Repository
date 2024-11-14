@@ -9,17 +9,19 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class TURNO
+    public partial class TURNO : IEntidadConClavePrimaria
     {
         public int Codigo { get; set; }
         public Nullable<int> DocumentoEmpleado { get; set; }
         public Nullable<int> NumeroCajaRegistradora { get; set; }
         public Nullable<System.DateTime> Ingreso { get; set; }
         public Nullable<System.DateTime> Salida { get; set; }
-    
+        public int ClavePrimaria => Codigo; 
+
         public virtual CAJA_REGISTRADORA CAJA_REGISTRADORA { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
     }

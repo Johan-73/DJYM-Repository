@@ -33,7 +33,7 @@ namespace DJYM_WebApplication.Models
         public virtual DbSet<CLIENTE> DbSet_CLIENTE { get; set; }
         public virtual DbSet<DETALLE_FACTURA_COMPRA> DbSet_DETALLE_FACTURA_COMPRA { get; set; }
         public virtual DbSet<DETALLE_FACTURA_VENTA> DbSet_DETALLE_FACTURA_VENTA { get; set; }
-        public virtual DbSet<EMPLEADO> DbSet_EMPLEADOes { get; set; }
+        public virtual DbSet<EMPLEADO> DbSet_EMPLEADO { get; set; }
         public virtual DbSet<FACTURA_COMPRA> DbSet_FACTURA_COMPRA { get; set; }
         public virtual DbSet<FACTURA_VENTA> DbSet_FACTURA_VENTA { get; set; }
         public virtual DbSet<OPERACION_CAJA> DbSet_OPERACION_CAJA { get; set; }

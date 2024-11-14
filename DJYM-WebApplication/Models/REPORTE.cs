@@ -9,14 +9,16 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class REPORTE
+    public partial class REPORTE : IEntidadConClavePrimaria
     {
         public int Numero { get; set; }
         public Nullable<int> CodigoPeriodo { get; set; }
-    
+        public int ClavePrimaria => Numero; 
+
         public virtual PERIODO PERIODO { get; set; }
         public virtual REPORTE_COMPRAS REPORTE_COMPRAS { get; set; }
         public virtual REPORTE_ROTACION REPORTE_ROTACION { get; set; }

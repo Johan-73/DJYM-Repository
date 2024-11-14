@@ -9,10 +9,11 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
-    public partial class FACTURA_VENTA
+    public partial class FACTURA_VENTA : IEntidadConClavePrimaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FACTURA_VENTA()
@@ -26,7 +27,8 @@ namespace DJYM_WebApplication.Models
         public Nullable<int> NumeroCajaRegistradora { get; set; }
         public Nullable<decimal> Total { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-    
+        public int ClavePrimaria => Numero; 
+
         public virtual CAJA_REGISTRADORA CAJA_REGISTRADORA { get; set; }
         public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

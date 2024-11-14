@@ -168,6 +168,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IEntidadConClavePrimaria.cs" />
     <Compile Include="Models\CAJA_REGISTRADORA.cs">
       <DependentUpon>DJYM.tt</DependentUpon>
     </Compile>

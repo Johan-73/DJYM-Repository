@@ -9,6 +9,7 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
     using System;
     using System.Collections.Generic;
     
@@ -21,5 +22,6 @@ namespace DJYM_WebApplication.Models
     
         public virtual PRODUCTO PRODUCTO { get; set; }
         public virtual FACTURA_COMPRA FACTURA_COMPRA { get; set; }
+
     }
 }
