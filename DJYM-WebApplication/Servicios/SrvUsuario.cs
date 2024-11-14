@@ -1,4 +1,6 @@
+using DJYM_WebApplication.DTOs;
 using DJYM_WebApplication.Models;
+using DJYM_WebApplication.Servicios.Comun;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -9,92 +11,22 @@ namespace DJYM_WebApplication.Servicios
 {
     public class SrvUsuario
     {
-		private DBSuper_DJYMEntities DJYM;
-        public USUARIO usuario { get; set; }
+        private readonly CRUD<USUARIO> Crud;
 
-		public SrvUsario()
-		{
-			DBSuper_DJYMEntities DJYM = new DBSuper_DJYMEntities();
-		}
-
-		public string Insertar()
+        public SrvUsuario() { Crud = new CRUD<USUARIO>(); }
+        public SrvUsuario(USUARIO Usuario)
         {
-			try
-			{
-				PERFIL usuarioInsertado = DJYM.DbSet_USUARIO.Add(usuario);
-				DJYM.SaveChanges();
-				return $"Se grabó el usuario {usuarioInsertado.Nombre} con Id: {usuarioInsertado.Id}";
-			}
-			catch (Exception ex)
-			{
-				return ex.Message;
-			}
+            Crud = new CRUD<USUARIO> { Entidad = Usuario };
         }
 
-		public USUARIO ConsultarXId()
-		{
-			try
-			{
-				return DJYM.DbSet_USUARIO.FirstOrDefault(usuarioDB => usuarioDB.Id == usuario.Id);
-			}
-			catch(Exception ex)
-			{
-				return ex.Mesage;
-			}
-		}
+        public Resultado<USUARIO> Insertar() => Crud.Insertar();
 
-		public IQueryable<Usuario> Consultar()
-		{
-			try
-			{
-				return DJYM.DbSet_USUARIO.AsQueryable();
-			}
-			catch(Exception ex)
-			{
-				return ex.Message;
-			}
-		}
+        public Resultado<USUARIO> ConsultarXId() => Crud.ConsultarXId();
 
-		public string Actualizar()
-		{
-			try
-			{
-				if (ConsultarXId() != null)
-				{
-					DJYM.DbSet_USUARIO.AddOrUpdate(usuario);
-					DJYM.SaveChanges();
-					return $"Se actualizó el isuario con id {usuario.Id}";
-				}
-				else
-				{
-					return $"El usuario con Id {usuario.Id} no existe en la base de datos";
-				}
-			}
-			catch (Exception ex)
-			{
-				return ex.Message;
-			}
-		}
+        public Resultado<IQueryable<USUARIO>> Consultar() => Crud.Consultar();
 
-		public string Eliminar()
-		{
-			try
-			{
-				if (ConsultarXId() != null)
-				{
-					PERFIL usuarioEliminado = DJYM.DbSet_USUARIO.Remove(usuario);
-					DJYM.SaveChanges();
-					return $"Se eliminó el usuario {usuarioEliminado.Nombre} con Id: {usuarioEliminado.Id}";
-				}
-				else
-				{
-					return $"El usuario con Id {usuario.Id} no existe en la base de datos";
-				}
-			}
-			catch (Exception ex)
-			{
-				return ex.Message;
-			}
-		}
-	}
+        public Resultado<USUARIO> Actualizar() => Crud.Actualizar();
+
+        public Resultado<USUARIO> Eliminar() => Crud.Eliminar();
+    }
 }

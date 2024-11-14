@@ -10,6 +10,7 @@
 namespace DJYM_WebApplication.Models
 {
     using DJYM_WebApplication.Interfaces;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -26,9 +27,12 @@ namespace DJYM_WebApplication.Models
         public string Nombre { get; set; }
         public string Clave { get; set; }
         public string Salt { get; set; }
-        public int ClavePrimaria => Id; 
+        [JsonIgnore]
+        public int ClavePrimaria => Id;
 
+        [JsonIgnore]
         public virtual EMPLEADO EMPLEADO { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USUARIO_PERFIL> USUARIO_PERFIL { get; set; }
     }
