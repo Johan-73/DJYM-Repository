@@ -25,8 +25,9 @@ namespace DJYM_WebApplication.Models
         public int Codigo { get; set; }
         public string Titulo { get; set; }
         public string URL { get; set; }
+        [JsonIgnore]
         public int ClavePrimaria => Codigo;
-
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PERFIL> PERFILs { get; set; }
     }
