@@ -40,14 +40,22 @@ namespace DJYM_WebApplication.Servicios.Comun
 		{
 			try
 			{
-				TEntidad entidadConsultada = DJYM.Set<TEntidad>().Find(Entidad.ClavePrimaria);
-				string mensajeExitoso = $"{typeof(TEntidad).Name} se consulta exitosamente";
-				Resultado<TEntidad> resultado = new Resultado<TEntidad>(entidadConsultada)
-				{
-					MensajeExito = mensajeExitoso
-				};
-				return resultado;
-			}
+                TEntidad entidadConsultada = DJYM.Set<TEntidad>().Find(Entidad.ClavePrimaria);
+                if (entidadConsultada != null)
+                {
+                    string mensajeExitoso = $"{typeof(TEntidad).Name} se consulta exitosamente";
+                    Resultado<TEntidad> resultado = new Resultado<TEntidad>(entidadConsultada)
+                    {
+                        MensajeExito = mensajeExitoso
+                    };
+                    return resultado;
+                }
+                else
+                {
+                    string mensajeError = $"{typeof(TEntidad).Name} no existe en la base de datos";
+                    return new Resultado<TEntidad>(mensajeError);
+                }
+            }
 			catch (Exception ex)
 			{
 				return new Resultado<TEntidad>(ex.Message);
