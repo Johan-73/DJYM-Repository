@@ -23,7 +23,7 @@ namespace DJYM_WebApplication.Servicios
 
         public Resultado<EMPLEADO> ConsultarXId() => Crud.ConsultarXId();
 
-        public Resultado<IQueryable<EMPLEADO>> Consultar() => Crud.Consultar();
+        public Resultado<IQueryable> Consultar() => Crud.Consultar();
 
         public Resultado<EMPLEADO> Actualizar() => Crud.Actualizar();
 

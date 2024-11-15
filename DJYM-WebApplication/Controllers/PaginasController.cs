@@ -31,7 +31,7 @@ namespace DJYM_WebApplication.Controllers
 
         [HttpGet]
         [Route("Consultar")]
-        public Resultado<IQueryable<PAGINA>> Consultar()
+        public Resultado<IQueryable> Consultar()
         {
             SrvPagina srvPagina = new SrvPagina();
             return srvPagina.Consultar();

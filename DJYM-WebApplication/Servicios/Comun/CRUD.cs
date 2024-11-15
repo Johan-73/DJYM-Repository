@@ -62,13 +62,13 @@ namespace DJYM_WebApplication.Servicios.Comun
 			}
 		}
 
-        public Resultado<IQueryable<TEntidad>> Consultar()
+        public Resultado<IQueryable> Consultar()
 		{
 			try
 			{
                 IQueryable<TEntidad> entidadQueryable = DJYM.Set<TEntidad>().AsQueryable();
 				string mensajeExito = $"L@s {typeof(TEntidad).Name}S se consultaron exitosamente";
-				Resultado<IQueryable<TEntidad>> resultado = new Resultado<IQueryable<TEntidad>>(entidadQueryable)
+				Resultado<IQueryable> resultado = new Resultado<IQueryable>(entidadQueryable)
 				{
 					MensajeExito = mensajeExito
 				};
@@ -76,7 +76,7 @@ namespace DJYM_WebApplication.Servicios.Comun
             }
 			catch (Exception ex)
 			{
-				return new Resultado<IQueryable<TEntidad>>(ex.Message);
+				return new Resultado<IQueryable>(ex.Message);
 			}
 		}
 
