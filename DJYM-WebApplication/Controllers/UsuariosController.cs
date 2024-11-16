@@ -16,40 +16,40 @@ namespace DJYM_WebApplication.Controllers
         [Route("Insertar")]
         public Resultado<USUARIO> Insertar([FromBody] USUARIO usuario) 
         {
-            SrvUsuario srvUsuario = new SrvUsuario(usuario);
-            return srvUsuario.Insertar();
+            SrvUsuario servicio = new SrvUsuario(usuario);
+            return servicio.Insertar();
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
         public Resultado<USUARIO> ConsultarXId([FromBody] USUARIO usuario)
         {
-            SrvUsuario srvUsuario = new SrvUsuario(usuario);
-            return srvUsuario.ConsultarXId();
+            SrvUsuario servicio = new SrvUsuario(usuario);
+            return servicio.ConsultarXId();
         }
 
         [HttpGet]
         [Route("Consultar")]
         public Resultado<IQueryable> Consultar()
         {
-            SrvUsuario srvUsuario = new SrvUsuario();
-            return srvUsuario.Consultar();
+            SrvUsuario servicio = new SrvUsuario();
+            return servicio.Consultar();
         }
 
         [HttpPut]
         [Route("Actualizar")]
         public Resultado<USUARIO> Actualizar([FromBody] USUARIO usuario)
         {
-            SrvUsuario srvUsuario = new SrvUsuario(usuario);
-            return srvUsuario.Actualizar();
+            SrvUsuario servicio = new SrvUsuario(usuario);
+            return servicio.Actualizar();
         }
 
         [HttpDelete]
         [Route("Eliminar")]
         public Resultado<USUARIO> Eliminar([FromBody] USUARIO usuario)
         {
-            SrvUsuario srvUsuario = new SrvUsuario(usuario);
-            return srvUsuario.Eliminar();
+            SrvUsuario servicio = new SrvUsuario(usuario);
+            return servicio.Eliminar();
         }
     }
 }

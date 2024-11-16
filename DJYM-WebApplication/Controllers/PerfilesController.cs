@@ -17,24 +17,24 @@ namespace DJYM_WebApplication.Controllers
         [Route("Insertar")]
         public Resultado<PERFIL> Insertar([FromBody] PERFIL perfil)
         {
-            SrvPerfil srvPerfil = new SrvPerfil(perfil);
-            return srvPerfil.Insertar();
+            SrvPerfil servicio = new SrvPerfil(perfil);
+            return servicio.Insertar();
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
         public Resultado<PERFIL> ConsultarXId([FromBody] PERFIL perfil)
         {
-            SrvPerfil srvPerfil = new SrvPerfil(perfil);
-            return srvPerfil.ConsultarXId();
+            SrvPerfil servicio = new SrvPerfil(perfil);
+            return servicio.ConsultarXId();
         }
-
+         
         [HttpGet]
         [Route("Consultar")]
         public Resultado<IQueryable> Consultar()
         {
-            SrvPerfil srvPerfil = new SrvPerfil();
-            return srvPerfil.Consultar();
+            SrvPerfil servicio = new SrvPerfil();
+            return servicio.Consultar();
         }
 
         [HttpPut]

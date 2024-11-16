@@ -24,32 +24,32 @@ namespace DJYM_WebApplication.Controllers
         [Route("ConsultarXId")]
         public Resultado<EMPLEADO> ConsultarXId([FromBody] EMPLEADO empleado)
         {
-            SrvEmpleado srvEmpleado = new SrvEmpleado(empleado);
-            return srvEmpleado.ConsultarXId();
+            SrvEmpleado servicio = new SrvEmpleado(empleado);
+            return servicio.ConsultarXId();
         }
 
         [HttpGet]
         [Route("Consultar")]
         public Resultado<IQueryable> Consultar()
         {
-            SrvEmpleado srvEmpleado = new SrvEmpleado();
-            return srvEmpleado.Consultar();
+            SrvEmpleado servicio = new SrvEmpleado();
+            return servicio.Consultar();
         }
 
         [HttpPut]
         [Route("Actualizar")]
         public Resultado<EMPLEADO> Actualizar([FromBody] EMPLEADO empleado)
         {
-            SrvEmpleado srvEmpleado = new SrvEmpleado(empleado);
-            return srvEmpleado.Actualizar();
+            SrvEmpleado servicio = new SrvEmpleado(empleado);
+            return servicio.Actualizar();
         }
 
         [HttpDelete]
         [Route("Eliminar")]
         public Resultado<EMPLEADO> Eliminar([FromBody] EMPLEADO empleado)
         {
-            SrvEmpleado srvEmpleado = new SrvEmpleado(empleado);
-            return srvEmpleado.Eliminar();
+            SrvEmpleado servicio = new SrvEmpleado(empleado);
+            return servicio.Eliminar();
         }
     }
 }
