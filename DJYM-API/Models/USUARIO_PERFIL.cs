@@ -9,15 +9,18 @@
 
 namespace DJYM_WebApplication.Models
 {
+    using DJYM_WebApplication.Interfaces;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
     public partial class USUARIO_PERFIL
     {
+        
         public int IdPerfil { get; set; }
         public int IdUsuario { get; set; }
         public Nullable<bool> Activo { get; set; }
-    
+
         public virtual PERFIL PERFIL { get; set; }
         public virtual USUARIO USUARIO { get; set; }
     }

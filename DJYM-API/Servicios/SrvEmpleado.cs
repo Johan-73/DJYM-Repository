@@ -1,6 +1,7 @@
 using DJYM_WebApplication.DTOs;
 using DJYM_WebApplication.Models;
 using DJYM_WebApplication.Servicios.Comun;
+using Servicios_PD.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -12,39 +13,34 @@ namespace DJYM_WebApplication.Servicios
     public class SrvEmpleado
     {
         private readonly CRUD<EMPLEADO> Crud;
-        private readonly DBSuper_DJYMEntities DJYM;
-        private EMPLEADO Empleado;
 
         public SrvEmpleado() { Crud = new CRUD<EMPLEADO>(); }
         public SrvEmpleado(EMPLEADO Empleado)
         {
             Crud = new CRUD<EMPLEADO> { Entidad = Empleado };
-            this.Empleado = Empleado;
         }
 
-
-        public Resultado<Dictionary<USUARIO, EMPLEADO>> AsignarUsuario(USUARIO usuario, int documentoEmpleado)
+        public Resultado<USUARIO> ValidarExistenciaYDispobilidadDeEmpleado()
         {
             try
             {
-                EMPLEADO empleado = DJYM.Set<EMPLEADO>().Find(documentoEmpleado);
-                if (Empleado == null)
+                Resultado<EMPLEADO> resultadoEmpleado = ConsultarXId();
+                if (!resultadoEmpleado.Exito)
+                    return new Resultado<USUARIO>(resultadoEmpleado.MensajeError);
+
+                EMPLEADO empleado = resultadoEmpleado.Value;
+                if (empleado.USUARIOs.FirstOrDefault() != null)
                 {
-                    string mensajeError = "El empleado no existe en la base de datos";
-                    return new Resultado<Dictionary<USUARIO, EMPLEADO>>(mensajeError);
+                    string mensajeError = $"El empleado con documento {empleado.Documento} ya tiene un usuario";
+                    return new Resultado<USUARIO>(mensajeError);
                 }
 
-                Empleado.USUARIOs.Add(usuario);
-                DJYM.SaveChanges();
-
-                var diccionario = new Dictionary<USUARIO, EMPLEADO> { {usuario, empleado }, };
-                string mensajeExito = "Se le asignó al empleado el usuario exitosamente";
-                return new Resultado<Dictionary<USUARIO, EMPLEADO>>(diccionario) { MensajeExito = mensajeExito};
+                return new Resultado<USUARIO>(new USUARIO());
             }
             catch (Exception ex)
             {
-                return new Resultado<Dictionary<USUARIO, EMPLEADO>>(ex.Message);
-            }  
+                return new Resultado<USUARIO>(ex.Message);
+            }
         }
 
         public Resultado<EMPLEADO> Insertar() => Crud.Insertar();
@@ -55,6 +51,28 @@ namespace DJYM_WebApplication.Servicios
 
         public Resultado<EMPLEADO> Actualizar() => Crud.Actualizar();
 
-        public Resultado<EMPLEADO> Eliminar() => Crud.Eliminar();
+        public Resultado<EMPLEADO> Eliminar2() => Crud.Eliminar();
+
+        public Resultado<EMPLEADO> Eliminar()
+        {
+            try
+            {
+                var resultadoEmpleado = ConsultarXId();
+                if (!resultadoEmpleado.Exito)
+                    return resultadoEmpleado;
+
+                var empleado = resultadoEmpleado.Value;
+                if (empleado.USUARIOs.Any())
+                {
+                    SrvUsuario srvUsuario = new SrvUsuario(empleado.USUARIOs.FirstOrDefault());
+                    var resultadoUsuario = srvUsuario.Eliminar();
+                    if (!resultadoUsuario.Exito)
+                        return new Resultado<EMPLEADO>(resultadoUsuario.MensajeError);
+                }
+
+                return Crud.Eliminar();
+            }
+            catch (Exception ex) { return new Resultado<EMPLEADO>(ex.Message);  }
+        }
     }
 }

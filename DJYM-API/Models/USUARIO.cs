@@ -23,7 +23,7 @@ namespace DJYM_WebApplication.Models
         }
     
         public int Id { get; set; }
-        public Nullable<int> DocumentoEmpleado { get; set; }
+        public int DocumentoEmpleado { get; set; }
         public string Nombre { get; set; }
         public string Clave { get; set; }
         public string Salt { get; set; }

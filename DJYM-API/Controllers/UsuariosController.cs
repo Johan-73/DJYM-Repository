@@ -4,6 +4,7 @@ using DJYM_WebApplication.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 
@@ -12,6 +13,21 @@ namespace DJYM_WebApplication.Controllers
     [RoutePrefix("api/Usuarios")]
     public class UsuariosController : ApiController
     {
+        [HttpPost]
+        [Route("IniciarSesion")]
+        public Resultado<string> IniciarSesion([FromBody] USUARIO usuario)
+        {
+            try
+            {
+                SrvUsuario srvUsuario = new SrvUsuario(usuario);
+                return srvUsuario.IniciarSesion();
+            }
+            catch (Exception ex)
+            {
+                return new Resultado<string>(ex.Message);
+            }
+        }
+
         [HttpPost]
         [Route("Insertar")]
         public Resultado<USUARIO> Insertar([FromBody] USUARIO usuario) 
